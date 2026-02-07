@@ -25,12 +25,13 @@
         font-family: "Outfit", sans-serif;
         min-height: 100vh;
         margin: 0;
-        padding: 40px 20px 56px;
+        padding: 40px 20px 24px;
         text-align: center;
         position: relative;
         display: flex;
+        flex-direction: column;
         align-items: center;
-        justify-content: center;
+        justify-content: flex-start;
         overflow-x: hidden;
       }
 
@@ -239,9 +240,13 @@
         margin-bottom: 20px;
       }
       .qr-color-btns button {
+        flex: 0 0 auto;
         width: 44px;
         height: 44px;
         min-width: 44px;
+        min-height: 44px;
+        max-width: 44px;
+        max-height: 44px;
         padding: 0;
         border-radius: 50%;
         border: 2px solid rgba(255, 255, 255, 0.25);
@@ -328,20 +333,30 @@
       }
 
       footer {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        padding: 6px;
+        position: relative;
+        margin-top: 24px;
+        padding: 20px 0px 0px 0px;
+        width: 100%;
         display: flex;
         align-items: center;
         justify-content: center;
         gap: 12px;
         flex-wrap: wrap;
+        text-align: center;
         color: rgba(255, 255, 255, 0.6);
         font-size: 0.9rem;
         font-weight: 500;
-        border-top: 1px solid rgba(255, 255, 255, 0.2);
+        box-sizing: border-box;
+      }
+      footer::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100vw;
+        height: 1px;
+        background: rgba(255, 255, 255, 0.2);
       }
       footer a.linkedin-btn {
         display: inline-flex;
@@ -401,16 +416,20 @@
           width: 100%;
         }
         .qr-color-btns button {
+          flex: 0 0 auto;
           width: 40px;
           height: 40px;
           min-width: 40px;
+          min-height: 40px;
+          max-width: 40px;
+          max-height: 40px;
         }
         .qr-gradient-row {
           gap: 12px;
         }
         footer {
-          padding: 12px 8px;
-          padding-bottom: max(12px, env(safe-area-inset-bottom));
+          padding: 16px 0px 0px 0px;
+          margin-bottom: env(safe-area-inset-bottom, 0);
           font-size: 0.85rem;
         }
       }
