@@ -2,7 +2,10 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
     <title>QR Generator Tool</title>
     <link rel="icon" type="image/png" href="qr.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -295,8 +298,18 @@
         transform: scale(1.05);
       }
 
-      #qrCanvas {
+      .qr-canvas-wrap {
         margin-top: 16px;
+        max-width: 100%;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+      }
+      #qrCanvas {
+        max-width: 100%;
+        height: auto;
+        display: block;
+        margin: 0 auto;
         border-radius: 12px;
         background: rgba(255, 255, 255, 0.95);
         padding: 8px;
@@ -350,6 +363,68 @@
       footer a.linkedin-btn:hover {
         background: rgba(10, 102, 194, 0.45);
         transform: translateY(-1px);
+      }
+
+      /* Mobile & small screens */
+      @media (max-width: 600px) {
+        body {
+          padding: 20px 12px 24px;
+          align-items: flex-start;
+          min-height: 100vh;
+        }
+        .card {
+          padding: 20px 16px;
+          border-radius: 16px;
+        }
+        h2 {
+          font-size: 1.4rem;
+          margin-bottom: 18px;
+        }
+        input[type="text"],
+        .file-input-wrap {
+          padding: 12px 14px;
+          font-size: 16px;
+        }
+        .file-row {
+          flex-wrap: wrap;
+        }
+        .btn-remove-pic {
+          flex: 1 1 100%;
+          min-width: 0;
+        }
+        .btn-row {
+          flex-direction: column;
+          gap: 8px;
+        }
+        .btn-row button {
+          min-width: 0;
+          width: 100%;
+        }
+        .qr-color-btns button {
+          width: 40px;
+          height: 40px;
+          min-width: 40px;
+        }
+        .qr-gradient-row {
+          gap: 12px;
+        }
+        footer {
+          padding: 12px 8px;
+          padding-bottom: max(12px, env(safe-area-inset-bottom));
+          font-size: 0.85rem;
+        }
+      }
+
+      @media (max-width: 380px) {
+        body {
+          padding: 16px 10px 20px;
+        }
+        .card {
+          padding: 16px 12px;
+        }
+        h2 {
+          font-size: 1.25rem;
+        }
       }
     </style>
   </head>
@@ -459,7 +534,9 @@
         </div>
       </div>
 
-      <canvas id="qrCanvas"></canvas>
+      <div class="qr-canvas-wrap">
+        <canvas id="qrCanvas"></canvas>
+      </div>
     </div>
 
     <footer>
@@ -576,7 +653,10 @@
         const ctx = canvas.getContext("2d");
         const modSize = qr.modules.size;
         const margin = 12;
-        const cell = (400 - margin * 2) / modSize;
+        const card = document.querySelector(".card");
+        const maxW = card ? card.clientWidth - 64 : 400;
+        const qrSize = Math.min(400, Math.max(200, maxW));
+        const cell = (qrSize - margin * 2) / modSize;
         const total = Math.round(margin * 2 + modSize * cell);
 
         canvas.width = total;
