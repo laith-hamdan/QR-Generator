@@ -315,16 +315,41 @@
       }
 
       footer {
-        position: fixed;
+        position: absolute;
         bottom: 0;
         left: 0;
         right: 0;
-        padding: 16px;
-        text-align: center;
+        padding: 6px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        flex-wrap: wrap;
         color: rgba(255, 255, 255, 0.6);
         font-size: 0.9rem;
         font-weight: 500;
         border-top: 1px solid rgba(255, 255, 255, 0.2);
+      }
+      footer a.linkedin-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 6px;
+        border-radius: 8px;
+        background: rgba(10, 102, 194, 0.25);
+        text-decoration: none;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        transition:
+          background 0.2s ease,
+          transform 0.2s ease;
+      }
+      footer a.linkedin-btn img {
+        display: block;
+        border-radius: 4px;
+      }
+      footer a.linkedin-btn:hover {
+        background: rgba(10, 102, 194, 0.45);
+        transform: translateY(-1px);
       }
     </style>
   </head>
@@ -437,7 +462,17 @@
       <canvas id="qrCanvas"></canvas>
     </div>
 
-    <footer>Made by Laith Hamdan</footer>
+    <footer>
+      <span>Made by Laith Hamdan</span>
+      <a
+        class="linkedin-btn"
+        href="https://www.linkedin.com/in/laith-hamdan-89b142202/"
+        target="_blank"
+        rel="noopener noreferrer"
+        title="LinkedIn"
+        ><img src="in.jpg" alt="LinkedIn" width="20" height="20"
+      /></a>
+    </footer>
 
     <script>
       let logoImage = null;
